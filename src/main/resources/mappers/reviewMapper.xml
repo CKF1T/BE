@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.ssafit.model.dao.ReviewDao">
+    <resultMap type="Review" id="ReviewMap">
+        <result column="user_idx" property="userIdx"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="video_idx" property="videoIdx"/>
+        <result column="created_at" property="createdAt"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="ReviewMap">
+        SELECT *
+        FROM review;
+    </select>
+
+    <select id="findOne" resultMap="ReviewMap" parameterType="long">
+        SELECT *
+        FROM review
+        WHERE idx = #{idx};
+    </select>
+
+    <insert id="save" parameterType="Review" keyProperty="idx" useGeneratedKeys="true">
+        INSERT INTO review (content, user_idx, nick_name, video_idx)
+        VALUES (#{content}, #{userIdx}, #{nickName}, #{videoIdx})
+    </insert>
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM review
+        WHERE idx = #{idx}
+    </delete>
+
+    <update id="update" parameterType="Review">
+        UPDATE review
+        SET content = #{content}
+        WHERE idx = #{idx}
+    </update>
+
+</mapper>

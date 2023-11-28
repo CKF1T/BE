@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.ssafit.model.dao.UserDao">
+
+    <insert id="save" parameterType="User" keyProperty="idx" useGeneratedKeys="true">
+        INSERT INTO users (password, nick_name)
+        VALUES (#{password}, #{nickName})
+    </insert>
+
+    <update id="update" parameterType="User">
+        UPDATE users
+        SET subscribe = #{subscribe}
+        WHERE idx = #{idx}
+    </update>
+
+    <select id="findValidUser" parameterType="String" resultType="User">
+        SELECT idx, password, nick_name as nickName
+        FROM users
+        WHERE idx = #{idx}
+    </select>
+
+    <select id="login" parameterType="String" resultType="User">
+        SELECT idx, password, nick_name as nickName
+        FROM users
+        WHERE idx = #{idx}
+    </select>
+
+    <select id="findAllByNickName" parameterType="String" resultType="User">
+        SELECT idx, password, nick_name as nickName
+        FROM users
+        WHERE nick_name = #{nickname}
+    </select>
+
+    <select id="findByIdx" parameterType="Long" resultType="User">
+        SELECT idx, password, nick_name as nickName, subscribe
+        FROM users
+        WHERE idx = #{idx}
+    </select>
+
+    <select id="findByNickName" parameterType="String" resultType="User">
+        SELECT idx, password, nick_name as nickName
+        FROM users
+        WHERE nick_name = #{nickName}
+    </select>
+
+
+
+</mapper>
